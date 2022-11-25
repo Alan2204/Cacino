@@ -10,5 +10,6 @@ namespace Cacino
         }
 
         public DbSet<Participante> Participantes { get; set; }
+        public DbSet<Rifa> Rifa { get; set; }
     }
 }

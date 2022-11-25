@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Diana\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj": {}
+    "C:\\Users\\alan_\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Diana\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj": {
+    "C:\\Users\\alan_\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Diana\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj",
+        "projectUniqueName": "C:\\Users\\alan_\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj",
         "projectName": "Cacino",
-        "projectPath": "C:\\Users\\Diana\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj",
-        "packagesPath": "C:\\Users\\Diana\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Diana\\Source\\Repos\\Cacino\\Cacino\\obj\\",
+        "projectPath": "C:\\Users\\alan_\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj",
+        "packagesPath": "C:\\Users\\alan_\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\alan_\\Source\\Repos\\Cacino\\Cacino\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Diana\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\alan_\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.3, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.1, )"
@@ -84,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

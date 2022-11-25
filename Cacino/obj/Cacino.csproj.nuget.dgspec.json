@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Documentos\\Tarea 2022 parte 2\\PIA\\Cacino\\Cacino\\Cacino.csproj": {}
+    "C:\\Users\\Diana\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj": {}
   },
   "projects": {
-    "D:\\Documentos\\Tarea 2022 parte 2\\PIA\\Cacino\\Cacino\\Cacino.csproj": {
+    "C:\\Users\\Diana\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Documentos\\Tarea 2022 parte 2\\PIA\\Cacino\\Cacino\\Cacino.csproj",
+        "projectUniqueName": "C:\\Users\\Diana\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj",
         "projectName": "Cacino",
-        "projectPath": "D:\\Documentos\\Tarea 2022 parte 2\\PIA\\Cacino\\Cacino\\Cacino.csproj",
-        "packagesPath": "C:\\Users\\alan_\\.nuget\\packages\\",
-        "outputPath": "D:\\Documentos\\Tarea 2022 parte 2\\PIA\\Cacino\\Cacino\\obj\\",
+        "projectPath": "C:\\Users\\Diana\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj",
+        "packagesPath": "C:\\Users\\Diana\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Diana\\Source\\Repos\\Cacino\\Cacino\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\alan_\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Diana\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -84,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

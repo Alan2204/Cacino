@@ -82,6 +82,14 @@ namespace Cacino
                 opciones.AddPolicy("EsParticipante", politica => politica.RequireClaim("esParticipante"));
             });
 
+            services.AddCors(opciones =>
+            {
+                opciones.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("https://apirequest.io").AllowAnyMethod().AllowAnyHeader();
+                    
+                });
+            });
 
         }
 
@@ -97,6 +105,8 @@ namespace Cacino
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

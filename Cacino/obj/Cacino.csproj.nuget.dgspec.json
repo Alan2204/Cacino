@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alan_\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj": {}
+    "C:\\Users\\alan_\\source\\repos\\Cacino\\Cacino\\Cacino.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alan_\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj": {
+    "C:\\Users\\alan_\\source\\repos\\Cacino\\Cacino\\Cacino.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alan_\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj",
+        "projectUniqueName": "C:\\Users\\alan_\\source\\repos\\Cacino\\Cacino\\Cacino.csproj",
         "projectName": "Cacino",
-        "projectPath": "C:\\Users\\alan_\\Source\\Repos\\Cacino\\Cacino\\Cacino.csproj",
+        "projectPath": "C:\\Users\\alan_\\source\\repos\\Cacino\\Cacino\\Cacino.csproj",
         "packagesPath": "C:\\Users\\alan_\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alan_\\Source\\Repos\\Cacino\\Cacino\\obj\\",
+        "outputPath": "C:\\Users\\alan_\\source\\repos\\Cacino\\Cacino\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alan_\\AppData\\Roaming\\NuGet\\NuGet.Config",

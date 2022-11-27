@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cacino.Migrations
 {
-    public partial class SistemaUsuario : Migration
+    public partial class Clientes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,35 @@ namespace Cacino.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cliente",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Apellidos = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<int>(type: "int", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cliente", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Numero",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Ficha = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Numero", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,6 +198,58 @@ namespace Cacino.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "NumerosdeRifa",
+                columns: table => new
+                {
+                    IdNumero = table.Column<int>(type: "int", nullable: false),
+                    IdRifa = table.Column<int>(type: "int", nullable: false),
+                    RifaId = table.Column<int>(type: "int", nullable: false),
+                    NumeroId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NumerosdeRifa", x => new { x.IdNumero, x.IdRifa });
+                    table.ForeignKey(
+                        name: "FK_NumerosdeRifa_Numero_NumeroId",
+                        column: x => x.NumeroId,
+                        principalTable: "Numero",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NumerosdeRifa_Rifa_RifaId",
+                        column: x => x.RifaId,
+                        principalTable: "Rifa",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Participantes",
+                columns: table => new
+                {
+                    IdCliente = table.Column<int>(type: "int", nullable: false),
+                    IdRifa = table.Column<int>(type: "int", nullable: false),
+                    ClienteId = table.Column<int>(type: "int", nullable: false),
+                    RifaId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Participantes", x => new { x.IdCliente, x.IdRifa });
+                    table.ForeignKey(
+                        name: "FK_Participantes_Cliente_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Cliente",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Participantes_Rifa_RifaId",
+                        column: x => x.RifaId,
+                        principalTable: "Rifa",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -207,6 +288,26 @@ namespace Cacino.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NumerosdeRifa_NumeroId",
+                table: "NumerosdeRifa",
+                column: "NumeroId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NumerosdeRifa_RifaId",
+                table: "NumerosdeRifa",
+                column: "RifaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Participantes_ClienteId",
+                table: "Participantes",
+                column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Participantes_RifaId",
+                table: "Participantes",
+                column: "RifaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -227,13 +328,25 @@ namespace Cacino.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Rifa");
+                name: "NumerosdeRifa");
+
+            migrationBuilder.DropTable(
+                name: "Participantes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Numero");
+
+            migrationBuilder.DropTable(
+                name: "Cliente");
+
+            migrationBuilder.DropTable(
+                name: "Rifa");
         }
     }
 }

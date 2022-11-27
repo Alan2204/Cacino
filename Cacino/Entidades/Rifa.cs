@@ -9,5 +9,7 @@
         public string FechaInicio { get; set; }
 
         public string FechaFinal { get; set; }
+        public List<NumerosdeRifa> NumerosdeRifa { get; set; }
+        public List<Participantes> Participantes { get; set; }
     }
 }

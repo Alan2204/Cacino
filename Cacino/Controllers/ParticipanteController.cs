@@ -16,13 +16,13 @@ namespace Cacino.Controllers
             this.dbContext = dbContext;
         }
         [HttpGet]
-        public async Task<ActionResult<List<Participante>>> Get()
+        public async Task<ActionResult<List<Cliente>>> Get()
         {
-            return await dbContext.Participantes.ToListAsync();
+            return await dbContext.Cliente.ToListAsync();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(Participante participante)
+        public async Task<ActionResult> Post(Cliente participante)
         {
             dbContext.Add(participante);
             await dbContext.SaveChangesAsync();

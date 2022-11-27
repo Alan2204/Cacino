@@ -22,7 +22,7 @@ namespace Cacino.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Cacino.Entidades.Participante", b =>
+            modelBuilder.Entity("Cacino.Entidades.Cliente", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,6 +46,68 @@ namespace Cacino.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.ToTable("Cliente");
+                });
+
+            modelBuilder.Entity("Cacino.Entidades.Numero", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Ficha")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Numero");
+                });
+
+            modelBuilder.Entity("Cacino.Entidades.NumerosdeRifa", b =>
+                {
+                    b.Property<int>("IdNumero")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdRifa")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumeroId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RifaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdNumero", "IdRifa");
+
+                    b.HasIndex("NumeroId");
+
+                    b.HasIndex("RifaId");
+
+                    b.ToTable("NumerosdeRifa");
+                });
+
+            modelBuilder.Entity("Cacino.Entidades.Participantes", b =>
+                {
+                    b.Property<int>("IdCliente")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdRifa")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RifaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdCliente", "IdRifa");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("RifaId");
 
                     b.ToTable("Participantes");
                 });
@@ -273,6 +335,44 @@ namespace Cacino.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Cacino.Entidades.NumerosdeRifa", b =>
+                {
+                    b.HasOne("Cacino.Entidades.Numero", "Numero")
+                        .WithMany("NumerosdeRifa")
+                        .HasForeignKey("NumeroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cacino.Entidades.Rifa", "Rifa")
+                        .WithMany("NumerosdeRifa")
+                        .HasForeignKey("RifaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Numero");
+
+                    b.Navigation("Rifa");
+                });
+
+            modelBuilder.Entity("Cacino.Entidades.Participantes", b =>
+                {
+                    b.HasOne("Cacino.Entidades.Cliente", "Cliente")
+                        .WithMany("Participantes")
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cacino.Entidades.Rifa", "Rifa")
+                        .WithMany("Participantes")
+                        .HasForeignKey("RifaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Rifa");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -322,6 +422,23 @@ namespace Cacino.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Cacino.Entidades.Cliente", b =>
+                {
+                    b.Navigation("Participantes");
+                });
+
+            modelBuilder.Entity("Cacino.Entidades.Numero", b =>
+                {
+                    b.Navigation("NumerosdeRifa");
+                });
+
+            modelBuilder.Entity("Cacino.Entidades.Rifa", b =>
+                {
+                    b.Navigation("NumerosdeRifa");
+
+                    b.Navigation("Participantes");
                 });
 #pragma warning restore 612, 618
         }

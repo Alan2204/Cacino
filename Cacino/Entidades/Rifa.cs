@@ -1,9 +1,12 @@
-﻿namespace Cacino.Entidades
+﻿using System.ComponentModel.DataAnnotations;
+using Cacino.Validaciones;
+
+namespace Cacino.Entidades
 {
-    public class Rifa
+    public class Rifa 
     {
         public int Id { get; set; }
-
+        [Mayuscula]
         public string Nombre { get; set; }
 
         public string FechaInicio { get; set; }

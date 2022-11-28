@@ -180,3 +180,5 @@ C:\Users\alan_\Source\Repos\Cacino\Cacino\obj\Debug\net6.0\Cacino.genruntimeconf
 C:\Users\alan_\Source\Repos\Cacino\Cacino\obj\Debug\net6.0\ref\Cacino.dll
 C:\Users\alan_\Source\Repos\Cacino\Cacino\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\alan_\Source\Repos\Cacino\Cacino\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\alan_\source\repos\Cacino\Cacino\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\alan_\source\repos\Cacino\Cacino\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

@@ -15,7 +15,7 @@ namespace Cacino.Controllers
         {
             this.dbContext = dbContext;
         }
-        [HttpGet]
+        [HttpGet("Consultar Rifa")]
         public async Task<ActionResult<List<Cliente>>> Get()
         {
             return await dbContext.Cliente.ToListAsync();

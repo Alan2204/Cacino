@@ -1,6 +1,6 @@
 ﻿namespace Cacino.DTOs
 {
-    public class ParticipanteDTO
+    public class ClienteCreacionDTO
     {
     }
 }

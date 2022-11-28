@@ -8,13 +8,20 @@ namespace Cacino.Utilidades
     {
         public AutoMapperProfile()
         {
-            CreateMap<Cliente, ClienteDTO>();
+            CreateMap<ClienteDTO, Cliente>();
+            CreateMap<Cliente, GetClienteDTO>();
+            CreateMap<ClienteCreacionDTO, Cliente>();
+            CreateMap<Cliente, ClienteDTOconRifa>();
+
+
             CreateMap<RifaDTO, Rifa>();
             CreateMap<Rifa, GetRifaDTO>();
             CreateMap<RifaCreacionDTO, Rifa>();
             CreateMap<Rifa, RifaDTOconCliente>();
             CreateMap<Rifa, RifaDTOconNumero>();
         }
+
+        
 
     }
 }

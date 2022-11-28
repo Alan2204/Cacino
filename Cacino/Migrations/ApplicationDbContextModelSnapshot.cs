@@ -47,7 +47,7 @@ namespace Cacino.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cliente");
+                    b.ToTable("Cliente", (string)null);
                 });
 
             modelBuilder.Entity("Cacino.Entidades.Numero", b =>
@@ -63,7 +63,7 @@ namespace Cacino.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Numero");
+                    b.ToTable("Numero", (string)null);
                 });
 
             modelBuilder.Entity("Cacino.Entidades.NumerosdeRifa", b =>
@@ -86,7 +86,7 @@ namespace Cacino.Migrations
 
                     b.HasIndex("RifaId");
 
-                    b.ToTable("NumerosdeRifa");
+                    b.ToTable("NumerosdeRifa", (string)null);
                 });
 
             modelBuilder.Entity("Cacino.Entidades.Participantes", b =>
@@ -109,7 +109,7 @@ namespace Cacino.Migrations
 
                     b.HasIndex("RifaId");
 
-                    b.ToTable("Participantes");
+                    b.ToTable("Participantes", (string)null);
                 });
 
             modelBuilder.Entity("Cacino.Entidades.Rifa", b =>
@@ -134,7 +134,7 @@ namespace Cacino.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rifa");
+                    b.ToTable("Rifa", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

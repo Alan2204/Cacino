@@ -35,7 +35,61 @@ namespace Cacino.Controllers
             this.mapper = mapper;
         
         }
-        
+
+        [HttpPost("Crear Rifa")]
+        public async Task<ActionResult> Post(RifaCreacionDTO rifaCreacionDTO)
+        {
+
+            var mismoNombre = await dbContext.Rifa.AnyAsync(x => x.Nombre == rifaCreacionDTO.Nombre);
+
+            if (mismoNombre)
+            {
+                return BadRequest($"Ya existe una rifa registrada como {rifaCreacionDTO.Nombre}");
+            }
+            
+            var rifa = mapper.Map<Rifa>(rifaCreacionDTO);
+
+            dbContext.Add(rifa);
+            await dbContext.SaveChangesAsync();
+
+            var rifaDTO = mapper.Map<RifaDTO>(rifa);
+            return CreatedAtRoute("obtenerRifa", new { id = rifa.Id }, rifaDTO);
+        }
+
+        [HttpPut("Modificar Rifa")] 
+        public async Task<ActionResult> Put(RifaCreacionDTO rifaCreacionDTO, int id)
+        {
+            var exist = await dbContext.Rifa.AnyAsync(x => x.Id == id);
+            if (!exist)
+            {
+                return NotFound();
+            }
+
+            var rifa = mapper.Map<Rifa>(rifaCreacionDTO);
+            rifa.Id = id;
+
+            dbContext.Update(rifa);
+            await dbContext.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("Eliminar Rifa.")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var exist = await dbContext.Rifa.AnyAsync(x => x.Id == id);
+            if (!exist)
+            {
+                return NotFound("El Recurso no fue encontrado.");
+            }
+
+            dbContext.Remove(new Rifa()
+            {
+                Id = id
+            });
+            await dbContext.SaveChangesAsync();
+            return Ok();
+        }
+
         [HttpPost("registrar")]
         public async Task<ActionResult<RespuestaAutentificacion>> Registrar(CredencialesUsuario credenciales)
         {
@@ -53,25 +107,7 @@ namespace Cacino.Controllers
             }
         }
 
-        [HttpPost("Crear Rifa")]
-        public async Task<ActionResult> Post(RifaCreacionDTO rifaCreacionDTO)
-        {
 
-            var mismoNombre = await dbContext.Rifa.AnyAsync(x => x.Nombre == rifaCreacionDTO.Nombre);
-
-            if (mismoNombre)
-            {
-                return BadRequest($"Ya existe una rifa registrada como {rifaCreacionDTO.Nombre}");
-            }
-
-            var rifa = mapper.Map<Rifa> ( rifaCreacionDTO );
-
-            dbContext.Add(rifa);
-            await dbContext.SaveChangesAsync();
-
-            var rifaDTO = mapper.Map<RifaDTO>(rifa);
-            return CreatedAtRoute("obtenerRifa", new { id = rifa.Id }, rifaDTO);
-        } 
 
         [HttpPost("login")]
         public async Task<ActionResult<RespuestaAutentificacion>> Login(CredencialesUsuario credencialesUsuario)

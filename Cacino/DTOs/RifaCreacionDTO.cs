@@ -9,10 +9,9 @@ namespace Cacino.DTOs
         [Mayuscula]
         public string Nombre { get; set; }
 
-        public string FechaInicio { get; set; }
+        public DateTime FechaInicio { get; set; }
 
-        public string FechaFinal { get; set; }
-
-        
+        public DateTime FechaFinal { get; set; }
+        //public List<int> PremiosId { get; set; }
     }
 }

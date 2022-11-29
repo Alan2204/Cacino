@@ -14,16 +14,13 @@ namespace Cacino
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Participantes>()
-                .HasKey(r => new { r.IdCliente, r.IdRifa });
-            modelBuilder.Entity<NumerosdeRifa>()
-                .HasKey(r2 => new { r2.IdNumero, r2.IdRifa });
+                .HasKey(r => new { r.IdRifa, r.IdCliente });
+            
         }
 
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Rifa> Rifa { get; set; }
-        public DbSet<Numero> Numero { get; set; }
-
-        public DbSet<NumerosdeRifa> NumerosdeRifa { get; set; }
+        public DbSet<Premios> Premios { get; set; }
         public DbSet<Participantes> Participantes { get; set; }
     }
 }

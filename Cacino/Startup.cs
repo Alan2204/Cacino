@@ -89,6 +89,7 @@ namespace Cacino
             {
                 opciones.AddPolicy("EsAdmin", politica => politica.RequireClaim("esAdmin"));
                 opciones.AddPolicy("EsParticipante", politica => politica.RequireClaim("esParticipante"));
+                opciones.AddPolicy("EsCliente", politica => politica.RequireClaim("esCliente"));
             });
 
             services.AddCors(opciones =>
@@ -102,7 +103,7 @@ namespace Cacino
 
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logge)
         {
             // Configure the HTTP request pipeline.
             if (env.IsDevelopment())

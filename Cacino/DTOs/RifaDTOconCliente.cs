@@ -1,6 +1,6 @@
 ﻿namespace Cacino.DTOs
 {
-    public class RifaDTOconCliente : GetClienteDTO
+    public class RifaDTOconCliente : RifaDTO
     {
         public List<ClienteDTO> Cliente { get; set; }
     }

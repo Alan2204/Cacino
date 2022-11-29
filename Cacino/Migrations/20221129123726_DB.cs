@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cacino.Migrations
 {
-    public partial class Clientes : Migration
+    public partial class DB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,24 +57,12 @@ namespace Cacino.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Apellidos = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefono = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Contraseña = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cliente", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Numero",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Ficha = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Numero", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,9 +71,9 @@ namespace Cacino.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FechaInicio = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FechaFinal = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    FechaInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaFinal = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -199,43 +187,18 @@ namespace Cacino.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "NumerosdeRifa",
-                columns: table => new
-                {
-                    IdNumero = table.Column<int>(type: "int", nullable: false),
-                    IdRifa = table.Column<int>(type: "int", nullable: false),
-                    RifaId = table.Column<int>(type: "int", nullable: false),
-                    NumeroId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NumerosdeRifa", x => new { x.IdNumero, x.IdRifa });
-                    table.ForeignKey(
-                        name: "FK_NumerosdeRifa_Numero_NumeroId",
-                        column: x => x.NumeroId,
-                        principalTable: "Numero",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_NumerosdeRifa_Rifa_RifaId",
-                        column: x => x.RifaId,
-                        principalTable: "Rifa",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Participantes",
                 columns: table => new
                 {
-                    IdCliente = table.Column<int>(type: "int", nullable: false),
                     IdRifa = table.Column<int>(type: "int", nullable: false),
+                    IdCliente = table.Column<int>(type: "int", nullable: false),
+                    Ficha = table.Column<int>(type: "int", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
                     RifaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Participantes", x => new { x.IdCliente, x.IdRifa });
+                    table.PrimaryKey("PK_Participantes", x => new { x.IdRifa, x.IdCliente });
                     table.ForeignKey(
                         name: "FK_Participantes_Cliente_ClienteId",
                         column: x => x.ClienteId,
@@ -244,6 +207,27 @@ namespace Cacino.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Participantes_Rifa_RifaId",
+                        column: x => x.RifaId,
+                        principalTable: "Rifa",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Premios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Lugar = table.Column<int>(type: "int", nullable: false),
+                    Premio = table.Column<int>(type: "int", nullable: false),
+                    RifaId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Premios", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Premios_Rifa_RifaId",
                         column: x => x.RifaId,
                         principalTable: "Rifa",
                         principalColumn: "Id",
@@ -290,16 +274,6 @@ namespace Cacino.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NumerosdeRifa_NumeroId",
-                table: "NumerosdeRifa",
-                column: "NumeroId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NumerosdeRifa_RifaId",
-                table: "NumerosdeRifa",
-                column: "RifaId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Participantes_ClienteId",
                 table: "Participantes",
                 column: "ClienteId");
@@ -307,6 +281,11 @@ namespace Cacino.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Participantes_RifaId",
                 table: "Participantes",
+                column: "RifaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Premios_RifaId",
+                table: "Premios",
                 column: "RifaId");
         }
 
@@ -328,19 +307,16 @@ namespace Cacino.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "NumerosdeRifa");
+                name: "Participantes");
 
             migrationBuilder.DropTable(
-                name: "Participantes");
+                name: "Premios");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Numero");
 
             migrationBuilder.DropTable(
                 name: "Cliente");

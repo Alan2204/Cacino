@@ -3,12 +3,13 @@ using Cacino.DTOs;
 using Cacino.Entidades;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Numerics;
+
 using System.Security.Claims;
 using System.Text;
 
@@ -24,7 +25,6 @@ namespace Cacino.Controllers
         private readonly ApplicationDbContext dbContext;
         private readonly IMapper mapper;
 
-
         public AdminController(UserManager<IdentityUser> userManager, IConfiguration configuration, SignInManager<IdentityUser> signManager,
             ApplicationDbContext dbContext, IMapper mapper)
         {
@@ -34,61 +34,8 @@ namespace Cacino.Controllers
             this.dbContext = dbContext;
             this.mapper = mapper;
         
-        }
+        }      
 
-        [HttpPost("Crear Rifa")]
-        public async Task<ActionResult> Post(RifaCreacionDTO rifaCreacionDTO)
-        {
-
-            var mismoNombre = await dbContext.Rifa.AnyAsync(x => x.Nombre == rifaCreacionDTO.Nombre);
-
-            if (mismoNombre)
-            {
-                return BadRequest($"Ya existe una rifa registrada como {rifaCreacionDTO.Nombre}");
-            }
-            
-            var rifa = mapper.Map<Rifa>(rifaCreacionDTO);
-
-            dbContext.Add(rifa);
-            await dbContext.SaveChangesAsync();
-
-            var rifaDTO = mapper.Map<RifaDTO>(rifa);
-            return CreatedAtRoute("obtenerRifa", new { id = rifa.Id }, rifaDTO);
-        }
-
-        [HttpPut("Modificar Rifa")] 
-        public async Task<ActionResult> Put(RifaCreacionDTO rifaCreacionDTO, int id)
-        {
-            var exist = await dbContext.Rifa.AnyAsync(x => x.Id == id);
-            if (!exist)
-            {
-                return NotFound();
-            }
-
-            var rifa = mapper.Map<Rifa>(rifaCreacionDTO);
-            rifa.Id = id;
-
-            dbContext.Update(rifa);
-            await dbContext.SaveChangesAsync();
-            return NoContent();
-        }
-
-        [HttpDelete("Eliminar Rifa.")]
-        public async Task<ActionResult> Delete(int id)
-        {
-            var exist = await dbContext.Rifa.AnyAsync(x => x.Id == id);
-            if (!exist)
-            {
-                return NotFound("El Recurso no fue encontrado.");
-            }
-
-            dbContext.Remove(new Rifa()
-            {
-                Id = id
-            });
-            await dbContext.SaveChangesAsync();
-            return Ok();
-        }
 
         [HttpPost("registrar")]
         public async Task<ActionResult<RespuestaAutentificacion>> Registrar(CredencialesUsuario credenciales)
@@ -173,6 +120,8 @@ namespace Cacino.Controllers
 
         }
 
+        
+
         [HttpPost("HacerAdmin")]
 
         public async Task<ActionResult> HacerAdmin(EditarAdminDTO editarAdminDTO)
@@ -194,5 +143,7 @@ namespace Cacino.Controllers
 
             return NoContent();
         }
+
+        
     }
 }
